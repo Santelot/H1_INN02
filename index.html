@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playbook - Sesión 2: Taller Visiones del Futuro (Preparatoria)</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+        .header {
+            background-color: #2196F3; /* Blue accent color */
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+         .header h2 {
+            margin: 5px 0 0;
+            font-size: 1.3em;
+            font-weight: normal;
+         }
+        .time-title {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 1.1em;
+            color: #333;
+        }
+        .banner {
+            background-color: #2196F3; /* Blue accent color */
+            color: white;
+            padding: 12px 15px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .banner:hover {
+            background-color: #1976D2; /* Darker blue on hover */
+        }
+        .banner .title {
+            font-size: 1.3em;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .banner .subtitle {
+            font-size: 1em;
+            margin-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            padding-top: 8px;
+            font-weight: normal;
+        }
+        .content {
+            display: none;
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            border-radius: 0 0 5px 5px;
+            background-color: #f9f9f9;
+        }
+        .step-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        .dialogue {
+            background-color: #e3f2fd; /* Light blue background for dialogue */
+            border: 1px solid #bbdefb; /* Lighter blue border */
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+            text-align: left; /* Adjusted alignment */
+            font-style: normal; /* Removed italics for main dialogue */
+            position: relative;
+        }
+        .dialogue::before { /* Optional: Add a small quote icon or similar */
+            /* content: '💬'; */
+            /* position: absolute; */
+            /* left: 10px; */
+            /* top: 10px; */
+            /* font-size: 1.2em; */
+        }
+        .dialogue i { /* Style for instructions within dialogue */
+           display: block;
+           margin-top: 8px;
+           color: #555;
+           font-style: italic;
+        }
+        .dropdown {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .dropdown select {
+            font-size: 1em;
+            padding: 8px 12px;
+            margin-left: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+            text-align: left;
+        }
+         td:first-child {
+            font-weight: bold;
+             width: 40%; /* Adjust width as needed */
+         }
+        ul, ol {
+            margin-left: 20px;
+            padding-left: 15px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        strong {
+             color: #1976D2; /* Darker blue for emphasis */
+        }
+        code {
+            background-color: #eee;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+    <script>
+        function updateActivities() {
+            var selectedTime = document.getElementById('time-select').value;
+            var activities = document.getElementsByClassName('activity');
+
+            document.getElementById('selected-time').innerText = "Tiempo efectivo de clase: " + selectedTime + " minutos";
+
+            // Since the base time for this session IS 40 minutes, we show all activities for 40min.
+            // No complex hiding logic needed for this specific session.
+            for (var i = 0; i < activities.length; i++) {
+                activities[i].style.display = 'block';
+            }
+        }
+
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            if (content.style.display === "none" || content.style.display === "") {
+                content.style.display = "block";
+            } else {
+                content.style.display = "none";
+            }
+        }
+
+        // Ensure activities are shown correctly on initial load based on default dropdown value
+        document.addEventListener('DOMContentLoaded', function() {
+            updateActivities(); // Call once on load
+             // Set default display to none for all content sections
+             var contents = document.querySelectorAll('.content');
+             contents.forEach(function(content) {
+                 content.style.display = 'none';
+             });
+        });
+    </script>
+</head>
+<body>
+
+<div class="header">
+    <h1>Playbook - Taller: Visiones del Futuro: Diseñando con IA Generativa (1º de Preparatoria)</h1>
+    <h2>Sesión 2: Exploración Cruzada y Fusión de Ideas con IA</h2>
+</div>
+
+<div class="container">
+    <div class="dropdown">
+        <label for="time-select">Tiempo efectivo de Clase:</label>
+        <select id="time-select" onchange="updateActivities()">
+            <option value="40" selected>40 minutos</option>
+            <!-- No other time options needed as per the PDF for this session -->
+        </select>
+    </div>
+
+    <h2 id="selected-time" class="time-title">Tiempo efectivo de clase: 40 minutos</h2>
+
+<!-- ------------------------------------------------- Espacio para De un Vistazo --------------------------------------------------------- -->
+<div id="activity-0" class="activity">
+    <div class="banner" onclick="toggleContent('de_un_vistazo')">
+        <div class="title">🎯 De un Vistazo y Preparación Previa 📋</div>
+        <div class="subtitle">Resumen rápido de la sesión y lo que necesitas preparar.</div>
+    </div>
+    <div id="de_un_vistazo" class="content">
+        <table>
+            <tr>
+                <td>
+                    <strong>Objetivos:</strong>
+                    <ul>
+                        <li>Profundizar la exploración del tema añadiendo preguntas desafiantes al Combinaboard.</li>
+                        <li>Fomentar la inspiración cruzada explorando el trabajo de otros equipos.</li>
+                        <li>Táctica 2: Aplicar "Mash-Up" para generar ideas innovadoras combinando elementos diversos (incluyendo IA/Automatización) de diferentes Combinaboards.</li>
+                    </ul>
+                    <strong>Tácticas Principales:</strong> Combinaboard (Parte 2: Preguntas Poderosas), Exploración Cruzada, Mash-Up (con enfoque IA).<br><br>
+                    <strong>Entregable Clave:</strong> Combinaboards actualizados con preguntas. 1-2 ideas de Mash-Up prometedoras (con rol de IA/Auto) por equipo.
+                </td>
+                <td>
+                    <strong>Materiales Específicos:</strong>
+                    <ul>
+                        <li>Proyector/Pantalla, Computadora, Internet.</li>
+                        <li>Acceso a tablero Miro (o similar) con los Combinaboards de la Sesión 1 visibles.</li>
+                        <li>Presentación de diapositivas (Láminas 9-12 detalladas abajo).</li>
+                        <li>Ejemplos de preguntas poderosas y Mash-Up con IA (Láminas 10 y 11).</li>
+                    </ul>
+                     <strong>Preparación Previa para ESTA Sesión:</strong>
+                    <ol>
+                        <li><strong>Presentación Lista:</strong> Tener listas las Diapositivas 9 a 12. Preparar ejemplos claros de Preguntas Poderosas y de Mash-Up que integren IA, relacionados con los ODS de ejemplo.</li>
+                        <li><strong>Tablero Miro:</strong> Asegurarse de que los Combinaboards de la Sesión 1 estén listos y que los estudiantes puedan ver (pero no editar directamente) los de otros equipos durante la exploración cruzada. Preparar un espacio nuevo en cada tablero de equipo para el Mash-Up.</li>
+                    </ol>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- ------------------------------------------------- Espacio para Actividades --------------------------------------------------------- -->
+
+<!-- Actividad 1 -->
+<div id="activity-1" class="activity">
+    <div class="banner" onclick="toggleContent('repaso_conexion')">
+        <div class="title">🔄 Actividad 1: Repaso y Conexión ⏰ Tiempo: 3 minutos</div>
+        <div class="subtitle">Recordar la sesión anterior y conectar con las actividades de hoy: preguntas y fusión de ideas.</div>
+    </div>
+    <div id="repaso_conexion" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (1.5 minutos):</strong> Repaso Sesión 1. Proyectar Diapositiva 9.</td>
+                <td class="dialogue">
+                    "¡Creadores del futuro, de vuelta a la acción! En la Sesión 1, dimos el primer gran salto: formamos nuestros 'Escuadrones de Innovación', elegimos una misión ODS súper importante y empezamos a construir nuestros <strong>Combinaboards</strong>. Llenamos esos tableros con imágenes inspiradoras, palabras clave potentes, tendencias tecnológicas como la IA y la Automatización, y ¡hasta nuestros primeros prompts!"
+                    <br><br>
+                    "Hoy, vamos a llevar esa exploración inicial a otro nivel. ¡Prepárense para profundizar, cuestionar y fusionar!"
+                </td>
+            </tr>
+             <tr>
+                <td><strong>PASO 2 (1.5 minutos):</strong> Introducir Sesión 2.</td>
+                <td class="dialogue">
+                     "En esta sesión, vamos a hacer dos cosas emocionantes: Primero, vamos a <strong>profundizar</strong> en nuestros Combinaboards haciéndonos <strong>Preguntas Poderosas</strong>, preguntas que desafíen lo que creemos saber y nos abran nuevas posibilidades. Segundo, vamos a hacer algo de 'espionaje constructivo', explorando las ideas de otros equipos. Y finalmente, ¡la magia del <strong>Mash-Up</strong>! Mezclaremos ingredientes inesperados de diferentes universos de ideas para inventar soluciones radicalmente nuevas, ¡impulsadas por IA! ¿Listos para preguntar MÁS, explorar MÁS y mezclar TODO para crear el futuro?"
+                     <i>(Mantener un tono energético y de expectativa).</i>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 2 -->
+<div id="activity-2" class="activity">
+    <div class="banner" onclick="toggleContent('combinaboard_preguntas')">
+        <div class="title">❓ Actividad 2: Táctica 1: Combinaboard (Parte 2) - Preguntas Poderosas ⏰ Tiempo: 10 minutos</div>
+        <div class="subtitle">Añadir preguntas desafiantes y exploratorias al Combinaboard para profundizar la reflexión.</div>
+    </div>
+    <div id="combinaboard_preguntas" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (2 minutos):</strong> Introducir Preguntas Poderosas. Proyectar Diapositiva 10.</td>
+                <td class="dialogue">
+                    "¡Volvamos a nuestros Combinaboards! Ya tienen una gran base de inspiración visual y conceptual. Ahora, vamos a inyectarle una dosis de curiosidad radical. Añadiremos <strong>Preguntas Poderosas</strong>. No buscamos respuestas fáciles, buscamos preguntas que nos hagan dudar, explorar los límites, ir más allá de lo obvio."
+                    <br><br>
+                    "Piensen en preguntas que empiecen con: <strong>'¿Será posible que...?'</strong>, <strong>'¿Qué pasaría si...?'</strong>, <strong>'¿Cómo podría la IA/Automatización [hacer algo radical]...?'</strong>. Preguntas que conecten su ODS con el potencial transformador de la tecnología."
+                </td>
+            </tr>
+             <tr>
+                <td><strong>PASO 2 (1 minuto):</strong> Mostrar Ejemplos.</td>
+                 <td class="dialogue">
+                     "Miren estos ejemplos para inspirarse:"
+                     <ul>
+                         <li><strong>ODS 4 (Educación):</strong> <i>¿Será posible que una IA enseñe a cualquier persona, en cualquier idioma, sin importar su nivel educativo? ¿Qué pasaría si cada estudiante tuviera su propio tutor IA que conociera sus emociones y ritmos? ¿Cómo podría la IA reducir el abandono escolar en zonas marginadas?</i></li>
+                         <li><strong>ODS 3 (Salud):</strong> <i>¿Qué pasaría si una IA pudiera diseñarte una dieta ideal con lo que tienes en casa? ¿Cómo podría un chatbot ayudarte a mejorar tu salud mental sin reemplazar a un terapeuta? ¿Será posible que una IA detecte enfermedades solo con escuchar tu voz?</i></li>
+                         <li><strong>ODS 5 (Igualdad):</strong> <i>¿Cómo podría una IA identificar y corregir sesgos en la educación, medios y redes sociales? ¿Será posible que una IA proponga políticas públicas más justas que las de los humanos? ¿Qué pasaría si todos los cuentos infantiles pasaran por un filtro de igualdad antes de publicarse?</i></li>
+                     </ul>
+                     "¡Estas son solo chispas! Queremos que generen sus propias preguntas ambiciosas."
+                 </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 3 (6 minutos):</strong> Tiempo de trabajo en equipo.</td>
+                <td class="dialogue">
+                    "¡Ahora ustedes! En equipo, añadan <strong>al menos 5 Preguntas Poderosas</strong> a su Combinaboard. Escríbanlas en notas de otro color para distinguirlas. ¡No busquen respuestas aún, solo generen las preguntas! Desafíen el status quo, exploren los límites de la tecnología y conecten la IA/Automatización con su ODS de formas inesperadas."
+                    <br><br>
+                    <i>(Circular por los equipos, animarles a ser audaces y específicos en sus preguntas. Fomentar la conexión explícita con IA/Auto. Asegurar que generen al menos 5 preguntas significativas).</i>
+                </td>
+            </tr>
+             <tr>
+                 <td><strong>PASO 4 (1 minuto):</strong> Cierre y Transición.</td>
+                 <td class="dialogue">
+                    "¡Excelente trabajo generando esas preguntas que desafían el futuro! Estas preguntas enriquecerán su exploración y nos prepararán para la siguiente fase: ¡la polinización cruzada de ideas!"
+                     <br><br>
+                    <i>(Entregable: Combinaboard actualizado con al menos 5 preguntas poderosas por equipo).</i>
+                 </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 3 -->
+<div id="activity-3" class="activity">
+    <div class="banner" onclick="toggleContent('exploracion_cruzada')">
+        <div class="title">👀 Actividad 3: Exploración Cruzada de Combinaboards ⏰ Tiempo: 7 minutos</div>
+        <div class="subtitle">Visitar los Combinaboards de otros equipos para inspirarse y "robar" ideas (constructivamente).</div>
+    </div>
+    <div id="exploracion_cruzada" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (1 minuto):</strong> Instrucciones para la exploración.</td>
+                <td class="dialogue">
+                     "¡Excelente trabajo con esas preguntas! Ahora, ¡vamos a espiar un poco! Van a tener 7 minutos para hacer una 'visita guiada' virtual a los Combinaboards de los <strong>otros equipos</strong> en Miro. Es momento de la <strong>polinización cruzada</strong> de ideas."
+                </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 2 (5 minutos):</strong> Navegación y Observación.</td>
+                 <td class="dialogue">
+                    "Naveguen por los tableros de sus compañeros. Miren sus imágenes, sus palabras clave, ¡y sobre todo sus Preguntas Poderosas! ¿Qué les llama la atención? ¿Qué ideas les inspira el trabajo de los demás? ¿Ven alguna conexión inesperada?"
+                    <br><br>
+                    "<strong>¡OJO! Solo pueden MIRAR.</strong> No editen nada en los tableros ajenos. El objetivo es observar, absorber inspiración y capturar chispas para su propio proyecto."
+                    <br><br>
+                    "Si algo les gusta mucho o les da una idea nueva, ¡anótenlo rápido para ustedes mismos! Pueden usar un post-it en su propio tablero o una libreta. ¡Preparen sus mentes para 'robar como artistas'!"
+                     <i>(Asegurar que el modo de visualización esté activo para los tableros ajenos. Fomentar la observación activa y la toma de notas individuales o en equipo sobre lo que les inspire).</i>
+                 </td>
+            </tr>
+             <tr>
+                <td><strong>PASO 3 (1 minuto):</strong> Conclusión de la exploración.</td>
+                <td class="dialogue">
+                    "¡Tiempo! Espero que esa exploración les haya abierto nuevas perspectivas y les haya dado aún más combustible creativo. ¡A explorar los futuros de sus compañeros!"
+                     <br><br>
+                     "Ahora que sus mentes están llenas de nuevas conexiones e inspiraciones... ¡es hora de la magia de la mezcla!"
+                 </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 4 -->
+<div id="activity-4" class="activity">
+    <div class="banner" onclick="toggleContent('mash_up')">
+        <div class="title">💥 Actividad 4: Táctica 2: Mash-Up (con enfoque IA) ⏰ Tiempo: 15 minutos</div>
+        <div class="subtitle">Combinar elementos diversos de los Combinaboards para generar ideas de solución innovadoras con IA/Automatización.</div>
+    </div>
+    <div id="mash_up" class="content">
+        <table>
+            <tr>
+                 <td><strong>PASO 1 (2 minutos):</strong> Introducir Mash-Up. Proyectar Diapositiva 11 (Instrucciones).</td>
+                <td class="dialogue">
+                     "¡Hora de la magia de la mezcla: el <strong>Mash-Up</strong>! Ahora que han visto muchas ideas y preguntas, ¡vamos a crear algo totalmente nuevo! El Mash-Up consiste en tomar elementos aparentemente inconexos y combinarlos para generar una idea sorprendente."
+                     <br><br>
+                     "<strong>Paso 1: Elijan sus 'ingredientes'.</strong> Seleccionen 2 o 3 elementos de CUALQUIER Combinaboard (el suyo o el de otros). Puede ser una imagen, una palabra clave, una pregunta poderosa, una tendencia tecnológica... ¡Pero <strong>al menos uno</strong> de esos ingredientes debe ser sobre <strong>IA Generativa o Automatización</strong>!"
+                </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 2 (2 minutos):</strong> Explicar el proceso y mostrar ejemplo. Proyectar Diapositiva 11 (Ejemplo).</td>
+                <td class="dialogue">
+                    "<strong>Paso 2: ¡Mézclenlos!</strong> ¿Qué idea loca, inesperada, futurista surge al combinar esos ingredientes? No se autocensuren, ¡las ideas más raras a menudo son las más innovadoras!"
+                    <br><br>
+                    "<strong>Paso 3: Lluvia de ideas rápida.</strong> Una vez que tengan una idea Mash-Up, pregúntense: ¿Cómo funcionaría? ¿Qué problema ODS podría resolver de forma diferente? ¿Cómo usaría específicamente la IA o la automatización? ¡Anótenlo todo en la nueva sección 'Mash-Up' de su tablero Miro!"
+                    <br><br>
+                    "Miren este ejemplo: Elemento 1: Edificios Verdes (ODS 11). Elemento 2: Drones Autónomos (Auto). Elemento 3: Asistente Virtual IA (IA). Idea Mash-Up: <strong>'Eco-Conserje IA'</strong>. Una IA que optimiza la energía del edificio Y controla drones de mantenimiento/limpieza, comunicándose con los residentes a través de un asistente virtual para dar consejos sostenibles y coordinar reparaciones. ¿Ven? ¡Combinamos elementos dispares para crear algo nuevo con un claro rol de IA/Auto!"
+                </td>
+            </tr>
+             <tr>
+                 <td><strong>PASO 3 (10 minutos):</strong> Tiempo de trabajo en equipo.</td>
+                 <td class="dialogue">
+                    "¡Ahora es su turno! Tienen 10 minutos para crear al menos 1 o 2 ideas Mash-Up potentes. ¡No tengan miedo de combinar cosas raras! ¡Ahí está la innovación! Enfóquense en cómo la IA o la Automatización habilita su idea loca."
+                    <br><br>
+                    <i>(Circular activamente, ayudar a los equipos a hacer conexiones inesperadas. Preguntarles: "¿Qué pasa si combinas [elemento X] con [elemento IA/Auto Y]?". Fomentar que piensen en el ROL específico de la IA/Auto en la idea Mash-Up. Proyectar Diapositiva 12 opcionalmente si se necesita otro ejemplo como MentorVivo).</i>
+                 </td>
+            </tr>
+             <tr>
+                 <td><strong>PASO 4 (1 minuto):</strong> Conclusión Mash-Up.</td>
+                 <td class="dialogue">
+                    "¡Tiempo! ¡Seguro que han creado unas mezclas futuristas increíbles! Guarden esas ideas Mash-Up, son las semillas de sus futuras soluciones."
+                     <br><br>
+                    <i>(Entregable: 1-2 ideas de Mash-Up prometedoras descritas brevemente por equipo en Miro, incluyendo rol de IA/Auto).</i>
+                 </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Actividad 5 -->
+<div id="activity-5" class="activity">
+    <div class="banner" onclick="toggleContent('cierre_presentacion_mashups')">
+        <div class="title">📢 Actividad 5: Cierre y Presentación Rápida de Mash-Ups ⏰ Tiempo: 5 minutos</div>
+        <div class="subtitle">Compartir brevemente las ideas Mash-Up generadas y preparar para la siguiente sesión.</div>
+    </div>
+    <div id="cierre_presentacion_mashups" class="content">
+        <table>
+            <tr>
+                <td><strong>PASO 1 (3 minutos):</strong> Ronda rápida de presentación.</td>
+                 <td class="dialogue">
+                     "¡Tiempo! ¡Seguro que han creado unas mezclas futuristas increíbles! Vamos a hacer una ronda súper rápida: Cada equipo, comparta en <strong>1 minuto</strong> su idea Mash-Up favorita que surgió hoy. ¿Qué mezclaron y qué inventaron? ¡Queremos escuchar esas chispas creativas!"
+                     <br><br>
+                    <i>(Gestionar el tiempo estrictamente. Cada equipo presenta muy brevemente UN Mash-Up. El objetivo es compartir la chispa, no una descripción detallada).</i>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>PASO 2 (2 minutos):</strong> Cierre y Próxima Sesión.</td>
+                <td class="dialogue">
+                    "¡Excelente fusión de ideas, creadores! Han explorado, preguntado y mezclado para generar visiones nuevas. ¡El potencial de combinar IA con ODS es enorme!"
+                    <br><br>
+                    "En la próxima sesión, vamos a darle un toque humano a estas ideas futuristas usando <strong>Human Truths</strong> y luego las describiremos a fondo con el <strong>T-Bar</strong>. ¡Prepárense para conectar la tecnología con las personas!"
+                    <br><br>
+                    "¡Guarden esas ideas de Mash-Up! ¡Son oro puro! ¡Nos vemos en la Sesión 3 para darles alma y estructura! ¡Hasta la próxima, arquitectos del futuro!"
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- ------------------------------------------------- Fin Espacio para Actividades --------------------------------------------------------- -->
+
+</div>
+
+</body>
+</html>
